@@ -56,5 +56,11 @@
     <ClCompile Include="teacher.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="database.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -157,8 +157,10 @@
   <ItemGroup>
     <ClCompile Include="assignment.c" />
     <ClCompile Include="course.c" />
+    <ClCompile Include="database.c" />
     <ClCompile Include="enrolment.c" />
     <ClCompile Include="list.c" />
+    <ClCompile Include="main.c" />
     <ClCompile Include="student.c" />
     <ClCompile Include="teacher.c" />
   </ItemGroup>
