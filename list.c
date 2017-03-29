@@ -13,7 +13,7 @@ void list_create(list_p *list){
 void list_destroy(list_p *head){
 	
 }
-
+//
 //Second way, when head is a pointer to node_t
 
 static node_t *head = NULL;

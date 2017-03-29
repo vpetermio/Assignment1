@@ -146,6 +146,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="assignment.h" />
+    <ClInclude Include="course.h" />
+    <ClInclude Include="database.h" />
+    <ClInclude Include="enrolment.h" />
+    <ClInclude Include="list.h" />
+    <ClInclude Include="student.h" />
+    <ClInclude Include="teacher.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="assignment.c" />
+    <ClCompile Include="course.c" />
+    <ClCompile Include="enrolment.c" />
+    <ClCompile Include="list.c" />
+    <ClCompile Include="student.c" />
+    <ClCompile Include="teacher.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
