@@ -20,9 +20,10 @@ void create_db(char a)
 
 void add_student(int student_number,char* first_name)
 {
-	
-	add_item(&student_list, student_create(student_number, first_name));
+	void* st = student_create(student_number, first_name);
 
+	add_item(&student_list, st);
+	
 }
 void add_teacher(void* teacher)
 {
@@ -31,6 +32,7 @@ void add_teacher(void* teacher)
 
 void print_student_list()
 {
-	print_list(student_list);
+	print_list(&student_list);
+	
 }
 
