@@ -5,18 +5,15 @@ typedef struct enrolment {
 	int course_number;
 }enrolment;
 
-void assigment_create(int student_number, int course_number)
+void enrolment_create(int student_number, int course_number)
 {
-	enrolment *er = alloc();
+	enrolment* er = (enrolment *)malloc(sizeof(enrolment));
 	er->student_number = student_number;
 	er->course_number = course_number;
 }
-static void* alloc(void) {
-	enrolment* temp = (enrolment *)malloc(sizeof(enrolment));
-	return temp;
-}
-void print_assignment()
+
+/*void print_assignment()
 {
-	enrolment er;
-	printf("%d %d", er.student_number, er.course_number);
-}
+	enrolment *er;
+	printf("%d %d", er->student_number, er->course_number);
+}*/

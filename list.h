@@ -1,6 +1,6 @@
 #pragma once
 #include <stdint.h>
-typedef struct node *list_p;
+typedef struct node_t *list_p;
 
 void list_create(list_p *list);
 void list_destroy(list_p *head);

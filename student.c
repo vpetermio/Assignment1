@@ -5,28 +5,25 @@ typedef struct student {
 	char *first_name;
 }student;
 
-void student_create(int student_number, char* first_name)
+void *student_create(int student_number, char* first_name)
 {
-	student *st = alloc();
+	student *st = (student *)malloc(sizeof(student));
 	st->student_number = student_number;
 	st->first_name = first_name;
+	return st;
 }
 
-static void *alloc(void)
-{
-	student *temp = (student *)malloc(sizeof(student));
-	return temp;
-}
 
-void print()
+
+/*void print()
 {
-	student st;
-	printf("%d ", st.student_number);
-	char *temp = st.first_name;
+	student *st;
+	printf("%d ", st->student_number);
+	char *temp = st->first_name;
 	while (temp!=0)
 	{
 		printf("%c", temp);
 		temp++;
 	}
 	printf("\n");
-}
+}*/
