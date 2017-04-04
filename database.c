@@ -1,6 +1,7 @@
 #include "database.h"
 #include "student.h"
 #include "list.h"
+
 list_p student_list;
 /*list_p teacher_list;
 list_p course_list;
@@ -21,9 +22,8 @@ void create_db(char a)
 void add_student(int student_number,char* first_name)
 {
 	void* st = student_create(student_number, first_name);
-
-	add_item(&student_list, st);
 	
+	add_item(&student_list, st);
 }
 void add_teacher(void* teacher)
 {
@@ -32,7 +32,16 @@ void add_teacher(void* teacher)
 
 void print_student_list()
 {
-	print_list(&student_list);
+	int size = no_of_items(&student_list);
+	printf("%d", size);
+	int i = 0;
+	while (i<size)
+	{
+		student *st = (student*)get_item(&student_list, i);
+		print(st);
+		i++;
+	}
+		
 	
 }
 

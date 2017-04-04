@@ -1,5 +1,7 @@
 #include "list.h"
 #include <stdio.h>
+#include <stdlib.h>
+
 
 typedef struct node_t {
 	void *content;
@@ -20,25 +22,28 @@ static int count = 0;
 
 int add_item(list_p *head, void *item)
 {
-int temp = count;
-	node_t *node = (node_t *)malloc(sizeof(node_t));
-	node->content = item;
-	node->next = *head;
-	*head = node;
-	count++;
 
-	if (temp+1==count)
-	{
-		return 0;
-	}
-	else 
-	{
-		return -1;
-	}
+	node_t *node = (node_t *)malloc(sizeof(node_t));
+	
+	node->content = item;
+	
+	node->next = *head;
+	
+	*head = node;
+
 }
 
-int no_of_items()
+int no_of_items(list_p *head)
 {
+	int count = 0;
+	node_t *it = *head;
+
+	while (it != NULL)
+	{
+		count++;
+		it = it->next;
+	}
+
 	return count;
 }
 
@@ -81,18 +86,28 @@ void *next(list_p *iterator)
 
 void *get_item(list_p *head, uint16_t index)
 {
+	
 	//start from the first link
-	node_t* current = *head;
-
+	node_t *current = *head;
+	int i = -1;
 	//if list is empty
-	if (*head == NULL) {
+	if (current == NULL) {
+		
 		return NULL;
 	}
 	else {
-		return current+(index-1);
+		
+		while (i < index)
+		{
+			
+			current = current->next;
+			i++;
+		}
+		return current;
 	}
+	
 }
-
+/*
 void print_list(list_p *head)
 {
 	node_t *current = *head;
@@ -102,4 +117,4 @@ void print_list(list_p *head)
 		printf("%d\n", *(int*)current->content);
 		current = current->next;
 	}
-}
+}*/
