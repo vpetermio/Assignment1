@@ -1,4 +1,5 @@
 #include "list.h"
+#include "student.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -26,7 +27,7 @@ int add_item(list_p *head, void *item)
 	node_t *node = (node_t *)malloc(sizeof(node_t));
 	
 	node->content = item;
-	
+
 	node->next = *head;
 	
 	*head = node;
@@ -89,21 +90,21 @@ void *get_item(list_p *head, uint16_t index)
 	
 	//start from the first link
 	node_t *current = *head;
-	int i = -1;
+	int i = 0;
 	//if list is empty
 	if (current == NULL) {
 		
 		return NULL;
 	}
 	else {
-		
-		while (i < index)
-		{
-			
-			current = current->next;
-			i++;
-		}
-		return current;
+			while (i < index)
+			{
+
+				current = current->next;
+				i++;
+			}
+			void *temp = current->content;
+			return temp;	
 	}
 	
 }
