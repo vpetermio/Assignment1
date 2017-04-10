@@ -1,4 +1,3 @@
-#pragma once
 #include <stdint.h>
 typedef struct node_t *list_p;
 

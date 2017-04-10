@@ -1,28 +1,44 @@
 #include "teacher.h"
+#include <stdio.h>
+#include <stddef.h>
+#include <stdlib.h>
+#include <string.h>
 
-typedef struct teacher {
-	int teacher_number;
-	char *first_name;
-}teacher;
-
-void teacher_create(int teacher_number, char *first_name)
+void* teacher_create(int teacher_number, char *first_name)
 {
 	teacher *th = (teacher *)malloc(sizeof(teacher));
-	th->first_name = first_name;
+	th->first_name = _strdup(first_name);
 	th->teacher_number = teacher_number;
+	return th;
+}
+
+int check_teacher_number(teacher *t, int teacher_number)
+{
+	if (t->teacher_number == teacher_number)
+	{
+		return 0;
+	}
+	else
+	{
+		return -1;
+	}
 }
 
 
-
-/*void print()
+void* get_teacher(teacher *t, int teacher_number)
 {
-	teacher *th;
-	printf("%d ", th->teacher_number);
-	char *temp = th->first_name;
-	while (temp != 0)
+	if (t->teacher_number == teacher_number)
 	{
-		printf("%c", temp);
-		temp++;
+		return t;
 	}
-	printf("\n");
-}*/
+	else
+	{
+		return NULL;
+	}
+}
+
+void print_teacher(teacher *t)
+{
+	printf("%d ", t->teacher_number);
+	printf("%s\n", t->first_name);
+}
