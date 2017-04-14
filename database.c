@@ -16,6 +16,7 @@ list_p course_list;
 list_p assignment_list;
 list_p enrolment_list;
 
+//Function to create database.
 void create_db(char a)
 {
 	if (a== 'S')
@@ -28,6 +29,7 @@ void create_db(char a)
 	}
 }
 
+//Adds a student to the list.
 void* add_student(int student_number,char* first_name)
 {
 	void* st = student_create(student_number, first_name);
@@ -36,6 +38,7 @@ void* add_student(int student_number,char* first_name)
 	return st;
 }
 
+//Adds teacher to the list.
 void* add_teacher(int teacher_number, char* first_name)
 {
 
@@ -45,6 +48,7 @@ void* add_teacher(int teacher_number, char* first_name)
 	return t;
 }
 
+//Adds course to the list.
 void* add_course(int course_number, char* course_name, int semester_number)
 {
 	void* c = course_create(course_number, course_name, semester_number);
@@ -53,6 +57,7 @@ void* add_course(int course_number, char* course_name, int semester_number)
 	return c;
 }
 
+//Adds assignment to the list.
 void* add_assignment(int teacher_number,int course_number)
 {
 	void* a = assignment_create(teacher_number, course_number);
@@ -61,6 +66,7 @@ void* add_assignment(int teacher_number,int course_number)
 	return a;
 }
 
+//Adds enrolment to the list.
 void* add_enrolment(int student_number, int course_number)
 {
 	void* e = enrolment_create(student_number, course_number);
@@ -69,6 +75,7 @@ void* add_enrolment(int student_number, int course_number)
 	return e;
 }
 
+//Checks if a student excists in the list.
 static int find_student(int student_number)
 {
 	int size = no_of_items(&student_list);
@@ -85,6 +92,7 @@ static int find_student(int student_number)
 	return -1;
 }
 
+//Checks if a student excists in the list and if it does return its student number.
 static int check_student(int student_number)
 {
 	int size = no_of_items(&student_list);
@@ -101,6 +109,7 @@ static int check_student(int student_number)
 	return -1;
 }
 
+//Checks if a course excists in the list.
 static int find_course(int course_number)
 {
 	int size = no_of_items(&course_list);
@@ -117,6 +126,7 @@ static int find_course(int course_number)
 	return -1;
 }
 
+//Checks if a course excists in the list and if it does return its course number.
 static int check_course(int course_number)
 {
 	int size = no_of_items(&course_list);
@@ -133,6 +143,7 @@ static int check_course(int course_number)
 	return -1;
 }
 
+//Checks if a teacher excists in the list.
 static int find_teacher(int teacher_number)
 {
 	int size = no_of_items(&teacher_list);
@@ -149,6 +160,7 @@ static int find_teacher(int teacher_number)
 	return -1;
 }
 
+//Checks if a teacher excists in the list and if it does return its course number.
 static int check_teacher(int teacher_number)
 {
 	int size = no_of_items(&teacher_list);
@@ -165,6 +177,7 @@ static int check_teacher(int teacher_number)
 	return -1;
 }
 
+//Checks if a enrolment excists in the list.
 static int find_enrolment(int student_number)
 {
 	int size = no_of_items(&enrolment_list);
@@ -181,6 +194,7 @@ static int find_enrolment(int student_number)
 	return -1;
 }
 
+//Assigns teacher to a course.
 void* assign_teacher(int teacher_number, int course_number)
 {
 	if (find_teacher(teacher_number) == 0 && find_course(course_number) == 0)
@@ -203,6 +217,7 @@ void* assign_teacher(int teacher_number, int course_number)
 	}
 }
 
+//Enrols student to a course.
 void* enrol_student(int student_number, int course_number)
 {
 	if (find_student(student_number) == 0 && find_course(course_number) == 0)
@@ -225,6 +240,7 @@ void* enrol_student(int student_number, int course_number)
 	}
 }
 
+//Returns course node by course number.
 static void* get_course_by_course_number(int course_number)
 {
 	int size = no_of_items(&course_list);
@@ -243,6 +259,7 @@ static void* get_course_by_course_number(int course_number)
 	return NULL;
 }
 
+//Returns student node by student number.
 static void* get_student_by_student_number(int student_number)
 {
 	int size = no_of_items(&student_list);
@@ -261,6 +278,7 @@ static void* get_student_by_student_number(int student_number)
 	return NULL;
 }
 
+//Returns teacher by teacher number.
 static void* get_teacher_by_teacher_number(int teacher_number)
 {
 	int size = no_of_items(&teacher_list);
@@ -279,6 +297,7 @@ static void* get_teacher_by_teacher_number(int teacher_number)
 	return NULL;
 }
 
+//Returns courses by student number in an array.
 static int* get_courses_by_student_number_in_array(int student_number)
 {
 	int size = no_of_items(&enrolment_list);
@@ -303,6 +322,7 @@ static int* get_courses_by_student_number_in_array(int student_number)
 	return (newArray);
 }
 
+//Prints courses by student number.
 void get_courses_by_student_number(int student_number)
 {
 	int size = no_of_items(&enrolment_list);
@@ -320,6 +340,7 @@ void get_courses_by_student_number(int student_number)
 	}
 }
 
+//Prints courses by teacher number.
 void get_courses_by_teacher_number(int teacher_number)
 {
 	int size = no_of_items(&assignment_list);
@@ -337,6 +358,7 @@ void get_courses_by_teacher_number(int teacher_number)
 	}
 }
 
+//Prints students by course number.
 void get_students_by_course_number(int course_number)
 {
 	int size = no_of_items(&enrolment_list);
@@ -354,6 +376,7 @@ void get_students_by_course_number(int course_number)
 	}
 }
 
+//Returns number of courses by student number.
 static int number_of_courses_by_student_number(int student_number)
 {
 	int size = no_of_items(&enrolment_list);
@@ -373,6 +396,7 @@ static int number_of_courses_by_student_number(int student_number)
 
 }
 
+//Returns teachers by course number.
 static void* get_teachers_by_course_number(int course_number)
 {
 	int size = no_of_items(&assignment_list);
@@ -391,6 +415,7 @@ static void* get_teachers_by_course_number(int course_number)
 	return NULL;
 }
 
+//Prints teachers by student number.
 void get_teachers_by_student_number(int student_number)
 {
 	
@@ -411,6 +436,7 @@ void get_teachers_by_student_number(int student_number)
 
 }
 
+//Removes student from enrolment.
 static int remove_student_from_enrolment(int student_number)
 {
 	int size_of_enrolment_list = no_of_items(&enrolment_list);
@@ -435,11 +461,11 @@ static int remove_student_from_enrolment(int student_number)
 	return -1;
 }
 
+//Removes student from the student list.
 int remove_student(int student_number)
 {
 	int size_of_student_list= no_of_items(&student_list);
 	int i = 0;
-	int removed_from_student_list = 0;
 	int removed_from_enrolment_list = remove_student_from_enrolment(student_number);
 	
 	while (i < size_of_student_list) {
@@ -458,6 +484,7 @@ int remove_student(int student_number)
 	return -1;
 }
 
+//Prints out student list.
 void print_student_list()
 {
 	int size = no_of_items(&student_list);
@@ -470,6 +497,7 @@ void print_student_list()
 	}
 }
 
+//Prints out teacher list.
 void print_teacher_list()
 {
 	int size = no_of_items(&teacher_list);
@@ -482,6 +510,7 @@ void print_teacher_list()
 	}
 }
 
+//Prints out course list.
 void print_course_list()
 {
 	int size = no_of_items(&course_list);
@@ -494,6 +523,7 @@ void print_course_list()
 	}
 }
 
+//Prints out assignment list.
 void print_assignment_list()
 {
 	int size = no_of_items(&assignment_list);
@@ -506,6 +536,7 @@ void print_assignment_list()
 	}
 }
 
+//Prints out enrolment list.
 void print_enrolment_list()
 {
 	int size = no_of_items(&enrolment_list);

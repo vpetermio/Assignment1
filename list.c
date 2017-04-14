@@ -17,10 +17,6 @@ void list_create(list_p *list){
 void list_destroy(list_p *head){
 	
 }
-//Second way, when head is a pointer to node_t
-
-static node_t *head = NULL;
-static int count = 0;
 
 int add_item(list_p *head, void *item)
 {
@@ -57,7 +53,6 @@ int remove_item(list_p *head, void* item)
 		node_t *current_head = *head;
 		*head = (*head)->next;
 		free(current_head);
-		count--;
 		return 0;
 	}
 	else {
@@ -69,7 +64,6 @@ int remove_item(list_p *head, void* item)
 			{
 				prev->next = current->next;
 				free(current);
-				count--;
 				return 0;
 			}
 			else {
@@ -79,28 +73,6 @@ int remove_item(list_p *head, void* item)
 		}
 		return -1;
 	}
-}
-
-list_p get_iterator(list_p *list)
-{}
-
-int has_next(list_p *iterator)
-{
-	node_t *current = *iterator;
-	if (current->next != NULL)
-	{
-		return 0;
-	}
-	else
-	{
-		return -1;
-	}
-}
-
-void *next(list_p *iterator)
-{
-	node_t *current = *iterator;
-	return current->next;
 }
 
 void *get_item(list_p *head, uint16_t index)
