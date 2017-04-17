@@ -9,14 +9,19 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
-
+/*
+@file database.c
+@brief Database for storing and handling students, teaachers, courses, assignments and enrolments.
+@author Adam Szekely and Peter Varanic
+*/
 list_p student_list;
 list_p teacher_list;
 list_p course_list;
 list_p assignment_list;
 list_p enrolment_list;
 
-//Function to create database.
+/*@brief Create a database.
+@param[in] a S for a student database, T for a teacher database.*/
 void create_db(char a)
 {
 	if (a== 'S')
@@ -29,7 +34,10 @@ void create_db(char a)
 	}
 }
 
-//Adds a student to the list.
+/*@brief Add a student to the student list.
+@return The created student.
+@param[in] student_number the student number.
+@param[in] first_name the first name.*/
 void* add_student(int student_number,char* first_name)
 {
 	void* st = student_create(student_number, first_name);
@@ -38,7 +46,10 @@ void* add_student(int student_number,char* first_name)
 	return st;
 }
 
-//Adds teacher to the list.
+/*@brief Add a teacher to the teacher list.
+@return The created teacher.
+@param[in] teacher_number the teacher number.
+@param[in] first_name the first name.*/
 void* add_teacher(int teacher_number, char* first_name)
 {
 
@@ -48,7 +59,11 @@ void* add_teacher(int teacher_number, char* first_name)
 	return t;
 }
 
-//Adds course to the list.
+/*@brief Add a course to the course list.
+@return The created course.
+@param[in] course_number the course number.
+@param[in] course_name the course name.
+@param[in] semester_number the semester number.*/
 void* add_course(int course_number, char* course_name, int semester_number)
 {
 	void* c = course_create(course_number, course_name, semester_number);
@@ -57,7 +72,11 @@ void* add_course(int course_number, char* course_name, int semester_number)
 	return c;
 }
 
-//Adds assignment to the list.
+/*@brief Add an assignment to the assignment list.
+@return The created assignment.
+@param[in] teacher_number the teacher number.
+@param[in] course_number the course number.
+*/
 void* add_assignment(int teacher_number,int course_number)
 {
 	void* a = assignment_create(teacher_number, course_number);
@@ -66,7 +85,11 @@ void* add_assignment(int teacher_number,int course_number)
 	return a;
 }
 
-//Adds enrolment to the list.
+/*@brief Add an enrolment to the enrolment list.
+@return The created enrolment.
+@param[in] student_number the student number.
+@param[in] course_number the course number.
+*/
 void* add_enrolment(int student_number, int course_number)
 {
 	void* e = enrolment_create(student_number, course_number);
@@ -75,7 +98,9 @@ void* add_enrolment(int student_number, int course_number)
 	return e;
 }
 
-//Checks if a student excists in the list.
+/*@brief Check if a student exists in the student list.
+@return int 0: OK student is in the list; -1: Student is not in the list.
+@param[in] student_number the student number*/
 static int find_student(int student_number)
 {
 	int size = no_of_items(&student_list);
@@ -92,7 +117,9 @@ static int find_student(int student_number)
 	return -1;
 }
 
-//Checks if a student excists in the list and if it does return its student number.
+/*@brief Check if a student exists in the student list.
+@return The student number; -1: Student is not in the list.
+@param[in] student_number the student number*/
 static int check_student(int student_number)
 {
 	int size = no_of_items(&student_list);
@@ -109,7 +136,9 @@ static int check_student(int student_number)
 	return -1;
 }
 
-//Checks if a course excists in the list.
+/*@brief Check if a course exists in the course list.
+@return int 0: OK course is in the list; -1: course is not in the list.
+@param[in] course_number the course number*/
 static int find_course(int course_number)
 {
 	int size = no_of_items(&course_list);
@@ -126,7 +155,9 @@ static int find_course(int course_number)
 	return -1;
 }
 
-//Checks if a course excists in the list and if it does return its course number.
+/*@brief Check if a course exists in the course list.
+@return The course number; -1: course is not in the list.
+@param[in] course_number the course number*/
 static int check_course(int course_number)
 {
 	int size = no_of_items(&course_list);
@@ -143,7 +174,9 @@ static int check_course(int course_number)
 	return -1;
 }
 
-//Checks if a teacher excists in the list.
+/*@brief Check if a teacher exists in the teacher list.
+@return int 0: OK teacher is in the list; -1: teacher is not in the list.
+@param[in] teacher_number the teacher number*/
 static int find_teacher(int teacher_number)
 {
 	int size = no_of_items(&teacher_list);
@@ -160,7 +193,9 @@ static int find_teacher(int teacher_number)
 	return -1;
 }
 
-//Checks if a teacher excists in the list and if it does return its course number.
+/*@brief Check if a teacher exists in the teacher list.
+@return The teacher number; -1: teacher is not in the list.
+@param[in] teacher_number the teacher number*/
 static int check_teacher(int teacher_number)
 {
 	int size = no_of_items(&teacher_list);
@@ -177,7 +212,9 @@ static int check_teacher(int teacher_number)
 	return -1;
 }
 
-//Checks if a enrolment excists in the list.
+/*@brief Check if a student exists in the enrolment list.
+@return int 0: OK student is in the list; -1: student is not in the list.
+@param[in] student_number the student number*/
 static int find_enrolment(int student_number)
 {
 	int size = no_of_items(&enrolment_list);
@@ -194,7 +231,10 @@ static int find_enrolment(int student_number)
 	return -1;
 }
 
-//Assigns teacher to a course.
+/*@brief Assign a teacher to a course.
+@return The created assignment; NULL: teacher/course does not exist.
+@param[in] teacher_number the teacher number.
+@param[in] course_number the course number.*/
 void* assign_teacher(int teacher_number, int course_number)
 {
 	if (find_teacher(teacher_number) == 0 && find_course(course_number) == 0)
@@ -217,7 +257,10 @@ void* assign_teacher(int teacher_number, int course_number)
 	}
 }
 
-//Enrols student to a course.
+/*@brief Enrol a student to a course.
+@return The created enrolment; NULL: student/course does not exist.
+@param[in] student_number the student number.
+@param[in] course_number the course number.*/
 void* enrol_student(int student_number, int course_number)
 {
 	if (find_student(student_number) == 0 && find_course(course_number) == 0)
@@ -240,7 +283,9 @@ void* enrol_student(int student_number, int course_number)
 	}
 }
 
-//Returns course node by course number.
+/*@brief Return a course by a course number.
+@return The course node; NULL:the course does not exist.
+@param[in] course_number the course number.*/
 static void* get_course_by_course_number(int course_number)
 {
 	int size = no_of_items(&course_list);
@@ -259,7 +304,9 @@ static void* get_course_by_course_number(int course_number)
 	return NULL;
 }
 
-//Returns student node by student number.
+/*@brief Return a student by a student number.
+@return The student node; NULL:the student does not exist.
+@param[in] student_number the student number.*/
 static void* get_student_by_student_number(int student_number)
 {
 	int size = no_of_items(&student_list);
@@ -278,7 +325,9 @@ static void* get_student_by_student_number(int student_number)
 	return NULL;
 }
 
-//Returns teacher by teacher number.
+/*@brief Return a teacher by a teacher number.
+@return The teacher node; NULL:the teacher does not exist.
+@param[in] teacher_number the teacher number.*/
 static void* get_teacher_by_teacher_number(int teacher_number)
 {
 	int size = no_of_items(&teacher_list);
@@ -297,7 +346,9 @@ static void* get_teacher_by_teacher_number(int teacher_number)
 	return NULL;
 }
 
-//Returns courses by student number in an array.
+/*@brief Return an array of courses for a specific student.
+@return The array of courses a specific student is enroled in.
+@param[in] student_number the student number*/
 static int* get_courses_by_student_number_in_array(int student_number)
 {
 	int size = no_of_items(&enrolment_list);
@@ -322,7 +373,8 @@ static int* get_courses_by_student_number_in_array(int student_number)
 	return (newArray);
 }
 
-//Prints courses by student number.
+/*@brief Print the courses a specific student is enroled in.
+@param[in] student_number the student number.*/
 void get_courses_by_student_number(int student_number)
 {
 	int size = no_of_items(&enrolment_list);
@@ -340,7 +392,8 @@ void get_courses_by_student_number(int student_number)
 	}
 }
 
-//Prints courses by teacher number.
+/*@brief Print the courses a specific teacher is assigned.
+@param[in] teacher_number the teacher number.*/
 void get_courses_by_teacher_number(int teacher_number)
 {
 	int size = no_of_items(&assignment_list);
@@ -358,7 +411,8 @@ void get_courses_by_teacher_number(int teacher_number)
 	}
 }
 
-//Prints students by course number.
+/*@brief Print the students which are enroled in a specific course.
+@param[in] course_number the course number.*/
 void get_students_by_course_number(int course_number)
 {
 	int size = no_of_items(&enrolment_list);
@@ -376,7 +430,9 @@ void get_students_by_course_number(int course_number)
 	}
 }
 
-//Returns number of courses by student number.
+/*@brief The amount of courses a specific student is enroled in.
+@return The number of courses.
+@param[in] student_number the student number*/
 static int number_of_courses_by_student_number(int student_number)
 {
 	int size = no_of_items(&enrolment_list);
@@ -396,7 +452,9 @@ static int number_of_courses_by_student_number(int student_number)
 
 }
 
-//Returns teachers by course number.
+/*@brief Return the teachers which are assigned to a specific course.
+@return The teachers; NULL:there are not teachers assigned to this course.
+@param[in] course_number the course number*/
 static void* get_teachers_by_course_number(int course_number)
 {
 	int size = no_of_items(&assignment_list);
@@ -415,7 +473,8 @@ static void* get_teachers_by_course_number(int course_number)
 	return NULL;
 }
 
-//Prints teachers by student number.
+/*@brief Print the teachers a specific student has.
+@param[in] student_number the student number.*/
 void get_teachers_by_student_number(int student_number)
 {
 	
@@ -436,7 +495,9 @@ void get_teachers_by_student_number(int student_number)
 
 }
 
-//Removes student from enrolment.
+/*@brief Remove a specific student from the enrolment list.
+@return 0:OK the student has been removed; -1:the student does not exist.
+@param[in] student_number the student number.*/
 static int remove_student_from_enrolment(int student_number)
 {
 	int size_of_enrolment_list = no_of_items(&enrolment_list);
@@ -461,7 +522,9 @@ static int remove_student_from_enrolment(int student_number)
 	return -1;
 }
 
-//Removes student from the student list.
+/*@brief Remove a specific student from the student list.
+@return 0:OK the student has been removed; -1:the student does not exist.
+@param[in] student_number the student number.*/
 int remove_student(int student_number)
 {
 	int size_of_student_list= no_of_items(&student_list);
@@ -484,7 +547,7 @@ int remove_student(int student_number)
 	return -1;
 }
 
-//Prints out student list.
+/*@brief Print the student list.*/
 void print_student_list()
 {
 	int size = no_of_items(&student_list);
@@ -497,7 +560,7 @@ void print_student_list()
 	}
 }
 
-//Prints out teacher list.
+/*@brief Print the teacher list.*/
 void print_teacher_list()
 {
 	int size = no_of_items(&teacher_list);
@@ -510,7 +573,7 @@ void print_teacher_list()
 	}
 }
 
-//Prints out course list.
+/*@brief Print the course list.*/
 void print_course_list()
 {
 	int size = no_of_items(&course_list);
@@ -523,7 +586,7 @@ void print_course_list()
 	}
 }
 
-//Prints out assignment list.
+/*@brief Print the assignment list.*/
 void print_assignment_list()
 {
 	int size = no_of_items(&assignment_list);
@@ -536,7 +599,7 @@ void print_assignment_list()
 	}
 }
 
-//Prints out enrolment list.
+/*@brief Print the enrolment list.*/
 void print_enrolment_list()
 {
 	int size = no_of_items(&enrolment_list);

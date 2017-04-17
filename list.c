@@ -3,34 +3,38 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stddef.h>
+/*
+@file list.c
+@brief Manages lists.
+@author Adam Szekely and Peter Varanic
+*/
 
-
+/*@brief The list node struct.*/
 typedef struct node_t {
 	void *content;
 	struct node_t *next;
 }node_t;
 
+/*@brief Create a list.
+@param[in] list pointer to a list.*/
 void list_create(list_p *list){
 	*list = NULL;
 }
 
-void list_destroy(list_p *head){
-	
-}
-
-int add_item(list_p *head, void *item)
+/*@brief Add an item to a specific list.
+@param[in] head pointer to a list.
+@param[in] item pointer to an item.*/
+void add_item(list_p *head, void *item)
 {
-
 	node_t *node = (node_t *)malloc(sizeof(node_t));
-	
 	node->content = item;
-
 	node->next = *head;
-	
 	*head = node;
-
 }
 
+/*@brief Return the number of items in a list.
+@return The number of items.
+@param[in] head pointer to a list.*/
 int no_of_items(list_p *head)
 {
 	int count = 0;
@@ -45,6 +49,10 @@ int no_of_items(list_p *head)
 	return count;
 }
 
+/*@brief Remove an item from a list.
+@return 0:OK the item has been removed; -1:the item does not exist.
+@param[in] head pointer to a list.
+@param[in] item pointer to an item.*/
 int remove_item(list_p *head, void* item)
 {
 	
@@ -75,9 +83,12 @@ int remove_item(list_p *head, void* item)
 	}
 }
 
+/*@brief Return an item from a list.
+@return The item; NULL:the list is empty.
+@param[in] head pointer to a list.
+@param[in] index the position of the item.*/
 void *get_item(list_p *head, uint16_t index)
 {
-	
 	//start from the first link
 	node_t *current = *head;
 	int i = 0;
@@ -86,7 +97,6 @@ void *get_item(list_p *head, uint16_t index)
 		
 		return NULL;
 	}
-	
 	else {
 			while (i < index)
 			{
@@ -95,6 +105,5 @@ void *get_item(list_p *head, uint16_t index)
 			}
 			return current->content;
 	}
-	
 }
 
